@@ -474,11 +474,22 @@
 
 
           
-  
-    <div class="comments" id="comments">
-      <div id="uyan_frame"></div>
-    </div>
-  
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments',
+            notify: false, // 邮件提醒 v1.1.4新增，下一步中有具体的邮箱设置
+            verify: true,
+            app_id: '0Yons7ImdymE1KdGDa5DYg4s-gzGzoHsz',
+            app_key: 'jHgPeyqhrMHuA2rGqEE6Xf6W',
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+        });
+    </script>
+    
 
 
         </div>
@@ -751,14 +762,6 @@
 
 
 
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2151127"></script>
-      <!-- UY END -->
-    
   
 
 
