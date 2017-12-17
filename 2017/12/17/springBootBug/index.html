@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="cs专业大三，一些学习知识 spring boot, ssm, mysql, web前端简单使用，一些简单的技术 即将找工作，一些找工作的准备">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="问题描述 Error resolving template\”upload\”, template might not exist or might not be accessible by any of the configured Templat… 写接口的时候找我controller里的路径总是出错  解决方法 ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springBootBug">
+<meta property="og:url" content="http://yoursite.com/2017/12/17/springBootBug/index.html">
 <meta property="og:site_name" content="噗哈哈">
-<meta property="og:description" content="cs专业大三，一些学习知识 spring boot, ssm, mysql, web前端简单使用，一些简单的技术 即将找工作，一些找工作的准备">
+<meta property="og:description" content="问题描述 Error resolving template\”upload\”, template might not exist or might not be accessible by any of the configured Templat… 写接口的时候找我controller里的路径总是出错  解决方法 把@Controller改成@RestController 下面用@Reques">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-04T11:00:53.638Z">
+<meta property="og:updated_time" content="2017-12-17T10:30:49.778Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="cs专业大三，一些学习知识 spring boot, ssm, mysql, web前端简单使用，一些简单的技术 即将找工作，一些找工作的准备">
+<meta name="twitter:title" content="springBootBug">
+<meta name="twitter:description" content="问题描述 Error resolving template\”upload\”, template might not exist or might not be accessible by any of the configured Templat… 写接口的时候找我controller里的路径总是出错  解决方法 把@Controller改成@RestController 下面用@Reques">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/17/springBootBug/"/>
 
 
 
 
 
-  <title>关于 | 噗哈哈</title>
+  <title>springBootBug | 噗哈哈</title>
   
 
 
@@ -252,38 +252,187 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/17/springBootBug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="噗哈哈">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/ad3e7317ly1fm1gubujwqj20at0atjwd.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗哈哈">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h2 class="post-title" itemprop="name headline">关于</h2>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <ul>
-<li>cs专业大三，一些学习知识</li>
-<li>spring boot, ssm, mysql, web前端简单使用，一些简单的技术</li>
-<li>即将找工作，一些找工作的准备</li>
+          <h2 class="post-title" itemprop="name headline">springBootBug</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-17T02:30:15-08:00">
+                2017-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/17/springBootBug/" class="leancloud_visitors" data-flag-title="springBootBug">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><ul>
+<li>Error resolving template\”upload\”, template might not exist or might not be accessible by any of the configured Templat…</li>
+<li>写接口的时候找我controller里的路径总是出错</li>
 </ul>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
+<li>把@Controller改成@RestController<blockquote>
+<p>下面用@RequestMapping(value=””,method=..)  不知道这个用不用改，改了上面应该就好了</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ul>
+<li>@Controller和@RestController的区别</li>
+<li>@RequestMapping和@GetMapping的区别</li>
+</ul>
+<h2 id="解决历程"><a href="#解决历程" class="headerlink" title="解决历程"></a>解决历程</h2><blockquote>
+<p>网上都是什么多了/,是静态文件错，花费很长时间也很崩溃</p>
+</blockquote>
 
-        
-      </div>
-      
-      
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/hexo功能备忘和待做/" rel="next" title="hexo功能备忘和待做">
+                <i class="fa fa-chevron-left"></i> hexo功能备忘和待做
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -329,8 +478,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -410,6 +568,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遗留问题"><span class="nav-number">3.</span> <span class="nav-text">遗留问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决历程"><span class="nav-number">4.</span> <span class="nav-text">解决历程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
