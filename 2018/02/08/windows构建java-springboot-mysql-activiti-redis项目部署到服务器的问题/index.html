@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+  <meta name="keywords" content="技术," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题 写在前面的话这几天老师要谈一个项目，就要用一个网上的项目做简单更改做一个demo，在构建系统，部署到都服务器，修改项目上都遇到很多问题，我觉得好些问题都是对linux系统和其他东西不了解导致的，所以总结一下">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题">
+<meta property="og:url" content="http://yoursite.com/2018/02/08/windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题/index.html">
+<meta property="og:site_name" content="噗哈哈">
+<meta property="og:description" content="windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题 写在前面的话这几天老师要谈一个项目，就要用一个网上的项目做简单更改做一个demo，在构建系统，部署到都服务器，修改项目上都遇到很多问题，我觉得好些问题都是对linux系统和其他东西不了解导致的，所以总结一下遇到的bug，对以后应该很用  连接redis的为问题 这个问题只改了bug，没">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-10T06:39:01.477Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题">
+<meta name="twitter:description" content="windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题 写在前面的话这几天老师要谈一个项目，就要用一个网上的项目做简单更改做一个demo，在构建系统，部署到都服务器，修改项目上都遇到很多问题，我觉得好些问题都是对linux系统和其他东西不了解导致的，所以总结一下遇到的bug，对以后应该很用  连接redis的为问题 这个问题只改了bug，没">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/08/windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题/"/>
+
+
+
+
+
+  <title>windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题 | 噗哈哈</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">噗哈哈</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">hh's blog</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="噗哈哈">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/ad3e7317ly1fm1gubujwqj20at0atjwd.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗哈哈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T15:31:51+08:00">
+                2018-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/08/windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题/" class="leancloud_visitors" data-flag-title="windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题"><a href="#windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题" class="headerlink" title="windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题"></a>windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题</h2><blockquote>
+<h2 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h2><p>这几天老师要谈一个项目，就要用一个网上的项目做简单更改做一个demo，在构建系统，部署到都服务器，修改项目上都遇到很多问题，我觉得好些问题都是对linux系统和其他东西不了解导致的，所以总结一下遇到的bug，对以后应该很用</p>
+</blockquote>
+<h3 id="连接redis的为问题"><a href="#连接redis的为问题" class="headerlink" title="连接redis的为问题"></a>连接redis的为问题</h3><blockquote>
+<p>这个问题只改了bug，没仔细看怎么回事，就说说遇到的问题和处理方法</p>
+</blockquote>
+<h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>开启的redis服务和项目里面的配置都是没有密码，但是一直报错，解决方法就是都加了密码</p>
+<h4 id="错误提示"><a href="#错误提示" class="headerlink" title="错误提示"></a>错误提示</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(error) ERR Client sent AUTH, but no password is set</span><br></pre></td></tr></table></figure>
+<h4 id="修改方法"><a href="#修改方法" class="headerlink" title="修改方法"></a>修改方法</h4><p>1.在redis客户端设置密码123456<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONFIG SET requirepass 123456</span><br></pre></td></tr></table></figure></p>
+<p>2.查看修改是否成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth 123456</span><br></pre></td></tr></table></figure></p>
+<p>3.在配置文件application.yml也修改密码<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="attr">redis:</span></span><br><span class="line"><span class="attr">database:</span> <span class="number">0</span></span><br><span class="line"><span class="attr">hostName:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line"><span class="attr">password:</span> <span class="number">123456</span> <span class="comment"># 密码（默认为空）</span></span><br><span class="line"><span class="attr">timeout:</span> <span class="number">6000</span>  <span class="comment"># 连接超时时长（毫秒）</span></span><br><span class="line"><span class="attr">pool:</span></span><br><span class="line"><span class="attr">    max-active:</span> <span class="number">1000</span>  <span class="comment"># 连接池最大连接数（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">    max-wait:</span> <span class="bullet">-1</span>      <span class="comment"># 连接池最大阻塞等待时间（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">    max-idle:</span> <span class="number">10</span>      <span class="comment"># 连接池中的最大空闲连接</span></span><br><span class="line"><span class="attr">    min-idle:</span> <span class="number">5</span>       <span class="comment"># 连接池中的最小空闲连接</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="项目部署到服务器后数据库处理的各种问题"><a href="#项目部署到服务器后数据库处理的各种问题" class="headerlink" title="项目部署到服务器后数据库处理的各种问题"></a>项目部署到服务器后数据库处理的各种问题</h3><h4 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h4><p>在windows中没有任何问题，在服务器上导入或者复制数据表以后服务器还一直显示找不到数据表，后面发现刷新时增加了一些同样名字的但是全部变为大写的数据表，后面发现原来windows上mysql是不区分大小写的，但是Linux上严格区分大小写，ps.mac上也不区分大小写。解决时使用网上说的更改命令都对的，但是说的没前没尾，浪费很多时间，下面是正确的解决方法</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>1.更改/etc/mysql/my.cnf，在最后添加下面代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">lower_case_table_names=1</span><br></pre></td></tr></table></figure></p>
+<p>修改后我的my.cnf文件变为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># The MySQL database server configuration file.</span><br><span class="line">#</span><br><span class="line"># You can copy this to one of:</span><br><span class="line"># - &quot;/etc/mysql/my.cnf&quot; to set global options,</span><br><span class="line"># - &quot;~/.my.cnf&quot; to set user-specific options.</span><br><span class="line"># </span><br><span class="line"># One can use all long options that the program supports.</span><br><span class="line"># Run program with --help to get a list of available options and with</span><br><span class="line"># --print-defaults to see which it would actually understand and use.</span><br><span class="line">#</span><br><span class="line"># For explanations see</span><br><span class="line"># http://dev.mysql.com/doc/mysql/en/server-system-variables.html</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line"># * IMPORTANT: Additional settings that can override those from this file!</span><br><span class="line">#   The files must end with &apos;.cnf&apos;, otherwise they&apos;ll be ignored.</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">!includedir /etc/mysql/conf.d/</span><br><span class="line">!includedir /etc/mysql/mysql.conf.d/</span><br><span class="line">[mysqld]</span><br><span class="line">lower_case_table_names=1</span><br></pre></td></tr></table></figure></p>
+<p>2.重启数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/mysql restart</span><br></pre></td></tr></table></figure></p>
+<p>3.查看大小写情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like &apos;%case_table%&apos;;</span><br></pre></td></tr></table></figure>
+<p>显示为1则修改成功</p>
+<p>这样就不区分大小写了，啦啦啦</p>
+<h3 id="部署到服务器上找不到controller之类的各种东西"><a href="#部署到服务器上找不到controller之类的各种东西" class="headerlink" title="部署到服务器上找不到controller之类的各种东西"></a>部署到服务器上找不到controller之类的各种东西</h3><blockquote>
+<p>我觉得有一种可能的原因是扫描不到包，不过改了也没有解决问题，还是写一下方法<br>1.注解的两种方式<br>@ComponentScan<br> @Controller<br>或者<br>@RestController<br>2.在application.java上加上扫描包注解<br>@ComponentScan({“com.hxy.modules.activiti.org.activiti”, “com.hxy”})</p>
+</blockquote>
+<p>下面是最终的解决方法</p>
+<h4 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h4><p>其实是这个项目需要用到计算机的计算机名，例如我的，本机IP127.0.0.1，也叫localhost，计算机名是DESKTOP-ES2RSHS23DKDL56这样的，这个程序会自动识别，但是我的linux服务器不知道它的主机名，就是<figure class="highlight plain"><figcaption><span>```里面那一串，也可以用命令```hostname```得到，解决方法就是把linux的主机名添加到配置文件里就可以了</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 解决方法</span><br><span class="line">1.打开文件/etc/hosts</span><br><span class="line">2.可以看到第一行是</span><br></pre></td></tr></table></figure></p>
+<p>127.0.0.1       localhost<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3. 把你的主机名加进去,修改为</span><br></pre></td></tr></table></figure></p>
+<p>127.0.0.1      localhost iW0788ypdf4lfaZ<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">4. 重新运行项目就可以了，啦啦啦啦</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 引入activiti后无法显示以及无法保存的问题</span><br><span class="line">&gt; 这两个问题应该是这个项目开发者的错误，没有什么系统的问题，就说说我的问题和解决方法啦</span><br><span class="line"></span><br><span class="line">#### activiti无法显示问题描述</span><br><span class="line">&gt; activiti是一个画流程图的工具，感觉很好用，不过没有使用过，就看了一下教程，疯狂看了教程代码和网络日志。顺便记一下看的时候很有用的教程https://www.jianshu.com/p/cf766a713a86 提供的项目代码也能用</span><br><span class="line">在应该出现流程图画板的地方什么都没有出现，chrome的network显示```http://localhost:8080/myFrame/model/1/json 404</span><br></pre></td></tr></table></figure></p>
+<h4 id="activiti无法显示解决方法"><a href="#activiti无法显示解决方法" class="headerlink" title="activiti无法显示解决方法"></a>activiti无法显示解决方法</h4><p>1.加入必要的静态工具包，详见链接<br>2.不知道为什么，这个项目的activiti静态包的设置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">3.具体修改</span><br><span class="line">editor-app/app-cfg.js</span><br><span class="line">```javascript</span><br><span class="line">ACTIVITI.CONFIG = &#123;</span><br><span class="line">    &apos;contextRoot&apos; : &apos;/service&apos;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>application.yml中注释项目路径的配置<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    context-path: /</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="无法保存的问题描述"><a href="#无法保存的问题描述" class="headerlink" title="无法保存的问题描述"></a>无法保存的问题描述</h4><p>点击activiti的保存以后没法保存，检查activiti中的保存java类ModelSaveRestResource没有问题</p>
+<h4 id="无法保存问题的错误提示"><a href="#无法保存问题的错误提示" class="headerlink" title="无法保存问题的错误提示"></a>无法保存问题的错误提示</h4><p>catch报错日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.apache.batik.transcoder.TranscoderException: null </span><br><span class="line">Enclosed Exception: </span><br><span class="line">Content is not allowed in</span><br></pre></td></tr></table></figure></p>
+<p>error报错日志<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.activiti.engine.ActivitiException: Error saving model] with root cause</span><br></pre></td></tr></table></figure></p>
+<p> 前端错误500</p>
+<h4 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h4><p> 1.activiti中有一个文件处理的java文件 JsonpCallbackFilter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter</span>(<span class="string">"/service/*"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsonpCallbackFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger log = LoggerFactory.getLogger(JsonpCallbackFilter.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig fConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        HttpServletRequest httpRequest = (HttpServletRequest) request;</span><br><span class="line">        HttpServletResponse httpResponse = (HttpServletResponse) response;</span><br><span class="line"></span><br><span class="line">        Map&lt;String, String[]&gt; parms = httpRequest.getParameterMap();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (parms.containsKey(<span class="string">"callback"</span>)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (log.isDebugEnabled())</span><br><span class="line">                log.debug(<span class="string">"Wrapping response with JSONP callback '"</span> + parms.get(<span class="string">"callback"</span>)[<span class="number">0</span>] + <span class="string">"'"</span>);</span><br><span class="line"></span><br><span class="line">            OutputStream out = httpResponse.getOutputStream();</span><br><span class="line"></span><br><span class="line">            GenericResponseWrapper wrapper = <span class="keyword">new</span> GenericResponseWrapper(httpResponse);</span><br><span class="line"></span><br><span class="line">            chain.doFilter(request, wrapper);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//handles the content-size truncation</span></span><br><span class="line">            ByteArrayOutputStream outputStream = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">            outputStream.write(<span class="keyword">new</span> String(parms.get(<span class="string">"callback"</span>)[<span class="number">0</span>] + <span class="string">"("</span>).getBytes());</span><br><span class="line">            outputStream.write(wrapper.getData());</span><br><span class="line">            outputStream.write(<span class="keyword">new</span> String(<span class="string">");"</span>).getBytes());</span><br><span class="line">            <span class="keyword">byte</span> jsonpResponse[] = outputStream.toByteArray();</span><br><span class="line"></span><br><span class="line">            wrapper.setContentType(<span class="string">"text/javascript;charset=UTF-8"</span>);</span><br><span class="line">            wrapper.setContentLength(jsonpResponse.length);</span><br><span class="line"></span><br><span class="line">            out.write(jsonpResponse);</span><br><span class="line"></span><br><span class="line">            out.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            chain.doFilter(request, response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>项目中又有一个文件处理的文件XssFilter并进行了bean的配置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XssFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">		XssHttpServletRequestWrapper xssRequest = <span class="keyword">new</span> XssHttpServletRequestWrapper(</span><br><span class="line">				(HttpServletRequest) request);</span><br><span class="line">		chain.doFilter(xssRequest, response);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> FilterRegistrationBean <span class="title">shiroFilterRegistration</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        FilterRegistrationBean registration = <span class="keyword">new</span> FilterRegistrationBean();</span><br><span class="line">        registration.setFilter(<span class="keyword">new</span> DelegatingFilterProxy(<span class="string">"shiroFilter"</span>));</span><br><span class="line">        <span class="comment">//该值缺省为false，表示生命周期由SpringApplicationContext管理，设置为true则表示由ServletContainer管理</span></span><br><span class="line">        registration.addInitParameter(<span class="string">"targetFilterLifecycle"</span>, <span class="string">"true"</span>);</span><br><span class="line">        registration.setEnabled(<span class="keyword">true</span>);</span><br><span class="line">        registration.setOrder(Integer.MAX_VALUE - <span class="number">1</span>);</span><br><span class="line">        registration.addUrlPatterns(<span class="string">"/*"</span>);</span><br><span class="line">        <span class="keyword">return</span> registration;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> FilterRegistrationBean <span class="title">xssFilterRegistration</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        FilterRegistrationBean registration = <span class="keyword">new</span> FilterRegistrationBean();</span><br><span class="line">        registration.setDispatcherTypes(DispatcherType.REQUEST);</span><br><span class="line">        registration.setFilter(<span class="keyword">new</span> XssFilter());</span><br><span class="line">        registration.addUrlPatterns(<span class="string">"/*"</span>);</span><br><span class="line">        registration.setName(<span class="string">"xssFilter"</span>);</span><br><span class="line">        registration.setOrder(Integer.MAX_VALUE);</span><br><span class="line">        <span class="keyword">return</span> registration;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> JsonpCallbackFilter <span class="title">filter</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JsonpCallbackFilter();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.我暂时直接删去了xssFilter的内容并注释了FilterConfig.java中的xssFilterRegistration函数，可以保存啦</p>
+<p>3.方法是在太暴力，没有研究两个函数的作用，后面项目处理文件的bug留坑</p>
+<h3 id="xml方式使用mybatis的错误No-typehandler-found-for-property-XXX"><a href="#xml方式使用mybatis的错误No-typehandler-found-for-property-XXX" class="headerlink" title="xml方式使用mybatis的错误No typehandler found for property XXX"></a>xml方式使用mybatis的错误No typehandler found for property XXX</h3><h4 id="错误描述"><a href="#错误描述" class="headerlink" title="错误描述"></a>错误描述</h4><blockquote>
+<p>这个部分是项目新加的功能<br>   前面是各种包的错误，最后都是一样，指向一个xml文件的错误，其实很简单，只是我太智障了，我用谷歌翻译后是“找不到属性文件的类型处理程序”结果，其实file是我的变量名，囧，所以意识是file变量的java类型和数据库类型不匹配</p>
+</blockquote>
+<h4 id="报错信息"><a href="#报错信息" class="headerlink" title="报错信息"></a>报错信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No typehandler found for property file</span><br></pre></td></tr></table></figure>
+<p>其实是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...... No typehandler found for property XXX</span><br></pre></td></tr></table></figure></p>
+<h4 id="解决方法-2"><a href="#解决方法-2" class="headerlink" title="解决方法"></a>解决方法</h4><p>将file变量的数据库类型和java类型对应，我的是把原来的MultipleFile改成String，数据库依然是varchar，就可以了。</p>
+<h3 id="ajax使用时报错"><a href="#ajax使用时报错" class="headerlink" title="ajax使用时报错"></a>ajax使用时报错</h3><h4 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h4><p>使用ajax上传文件时报错</p>
+<h4 id="报错信息-1"><a href="#报错信息-1" class="headerlink" title="报错信息"></a>报错信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught TypeError: Illegal invocation</span><br></pre></td></tr></table></figure>
+<h4 id="解决方法-3"><a href="#解决方法-3" class="headerlink" title="解决方法"></a>解决方法</h4><p>1.查看data里的数据是否真的有效，这里有两种file上传的方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span>  formData = <span class="keyword">new</span> FormData();</span><br><span class="line">formData.append(<span class="string">"file"</span>,$(<span class="string">"#file"</span>)[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span>  formData = <span class="keyword">new</span> FormData();</span><br><span class="line">formData.append(<span class="string">"file"</span>,$(<span class="string">"#file"</span>)[<span class="number">0</span>].files[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+<p>2.在ajax的属性里添加<figure class="highlight plain"><figcaption><span>false,```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.我最后的请求为****后面一个问题这个代码有问题后又有更改*****</span><br><span class="line">```javascript</span><br><span class="line">  $(&quot;#btnFile&quot;).click(function () &#123;</span><br><span class="line">        var  formData = new FormData();</span><br><span class="line">        formData.append(&quot;file&quot;,$(&quot;#file&quot;)[0]);</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            cache: true,</span><br><span class="line">            type: &quot;POST&quot;,</span><br><span class="line">            dataType: &apos;json&apos;,</span><br><span class="line">            contentType: &quot;form-data&quot;,</span><br><span class="line">            processData: false,</span><br><span class="line">            async: false,</span><br><span class="line">            url: &quot;$&#123;webRoot&#125;/demo/approved/upload&quot;,</span><br><span class="line">            data: formData,</span><br><span class="line">            beforeSend:function()&#123;</span><br><span class="line">                console.log(&quot;正在进行，请稍候&quot;);</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">            success: function(responseStr) &#123;</span><br><span class="line">                if(responseStr.status===0)&#123;</span><br><span class="line">                    console.log(&quot;成功&quot;+responseStr);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    console.log(&quot;失败&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            error: alert(&quot;Error&quot;)</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="解决上传文件时400，required-request-part-file-is-not-present的问题"><a href="#解决上传文件时400，required-request-part-file-is-not-present的问题" class="headerlink" title="解决上传文件时400，required request part file is not present的问题"></a>解决上传文件时400，required request part file is not present的问题</h3><h4 id="错误描述-1"><a href="#错误描述-1" class="headerlink" title="错误描述"></a>错误描述</h4><p>spring boot使用MultipartFile类型做上传文件是，方法同原来写的spring boot中的方法一样，但是总是出问题，解决了四天还没有解决，现在解决了。</p>
+<h4 id="报错信息-2"><a href="#报错信息-2" class="headerlink" title="报错信息"></a>报错信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;timestamp&quot;: 1517142211343,</span><br><span class="line">    &quot;status&quot;: 400,</span><br><span class="line">    &quot;error&quot;: &quot;Bad Request&quot;,</span><br><span class="line">    &quot;exception&quot;: &quot;org.springframework.web.multipart.support.MissingServletRequestPartException&quot;,</span><br><span class="line">    &quot;message&quot;: &quot;Required request part &apos;file&apos; is not present&quot;,</span><br><span class="line">    &quot;path&quot;: &quot;/demo/approved/upload&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="解决方法-4"><a href="#解决方法-4" class="headerlink" title="解决方法"></a>解决方法</h4><p>1.应该是配置的问题，所以增加配置，尝试多个以后发现这个有用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CommonsMultipartResolver <span class="title">multipartResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	CommonsMultipartResolver multipart = <span class="keyword">new</span> CommonsMultipartResolver();</span><br><span class="line">	multipart.setMaxUploadSize(<span class="number">3</span> * <span class="number">1024</span> * <span class="number">1024</span>);</span><br><span class="line">	<span class="keyword">return</span> multipart;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="meta">@Order</span>(<span class="number">0</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> MultipartFilter <span class="title">multipartFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		MultipartFilter multipartFilter = <span class="keyword">new</span> MultipartFilter();</span><br><span class="line">		multipartFilter.setMultipartResolverBeanName(<span class="string">"multipartResolver"</span>);</span><br><span class="line">		<span class="keyword">return</span> multipartFilter;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.在返回的函数名前添加<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">```java</span><br><span class="line"> @PostMapping(value = &quot;upload&quot;,consumes = &quot;multipart/form-data&quot;)</span><br><span class="line">    @RequiresPermissions(&quot;act:model:all&quot;)</span><br><span class="line">    public @ResponseBody BaseApi myupload (HttpServletRequest request,</span><br><span class="line">                           @RequestParam(value = &quot;myfile&quot;) MultipartFile file) throws Exception&#123;</span><br><span class="line"></span><br><span class="line">//        log.info(&quot;进入upload&quot;+tag);</span><br><span class="line">        try&#123;</span><br><span class="line">            String filename = file.getOriginalFilename();</span><br><span class="line">            String path = request.getServletContext().getRealPath(&quot;/files/&quot;);</span><br><span class="line">            log.info(&quot;文件名字是 &quot;+filename+&quot; 文件路径是 &quot;+path);</span><br><span class="line">            File filepath = new File(path,filename);</span><br><span class="line">            //判断路径是否存在，如果不存在就创建一个</span><br><span class="line">            if (!filepath.getParentFile().exists()) &#123;</span><br><span class="line">                filepath.getParentFile().mkdirs();</span><br><span class="line">            &#125;</span><br><span class="line">            //将上传文件保存到一个目标文件当中</span><br><span class="line">            file.transferTo(new File(path + File.separator + filename));</span><br><span class="line">            //返回文件的路径</span><br><span class="line">            JSONObject jsonObject = new JSONObject();</span><br><span class="line"></span><br><span class="line">            jsonObject.put(&quot;path&quot;,path+File.separator+filename);</span><br><span class="line">            return new BaseApi(&quot;ok&quot;,0,jsonObject);</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line">            log.info(&quot;出错&quot;);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return new BaseApi(&quot;error&quot;,1,null);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.不知道有没有用，但是我增加了一个包<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;dependency&gt;</span></span><br><span class="line">		<span class="string">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span></span><br><span class="line">		<span class="string">&lt;artifactId&gt;spring-boot-starter-web-services&lt;/artifactId&gt;</span></span><br><span class="line"><span class="string">&lt;/dependency&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>4.贴上解决这个问题的网址：<a href="https://stackoverflow.com/questions/43936372/upload-file-springboot-required-request-part-file-is-not-present" target="_blank" rel="noopener">https://stackoverflow.com/questions/43936372/upload-file-springboot-required-request-part-file-is-not-present</a></p>
+<h4 id="这个问题前端失败的问题已经解决了"><a href="#这个问题前端失败的问题已经解决了" class="headerlink" title="这个问题前端失败的问题已经解决了"></a>这个问题前端失败的问题已经解决了</h4><h5 id="问题描述-4"><a href="#问题描述-4" class="headerlink" title="问题描述"></a>问题描述</h5><p>报错和后端的一样，原因是前端传文件的时候取的值不是文件</p>
+<h5 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h5><p>1.更改js就可以了，贴上代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fd = <span class="keyword">new</span> FormData();</span><br><span class="line">       fd.append( <span class="string">"myfile"</span>, $(<span class="string">"#myfile"</span>)[<span class="number">0</span>].files[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">       $.ajax(&#123;</span><br><span class="line">           type: <span class="string">"POST"</span>,</span><br><span class="line">           url: <span class="string">"$&#123;webRoot&#125;/demo/approved/upload"</span>,</span><br><span class="line">           data: fd,</span><br><span class="line">           contentType: <span class="literal">false</span>,</span><br><span class="line">           processData: <span class="literal">false</span>,</span><br><span class="line">           cache: <span class="literal">false</span>,</span><br><span class="line">           <span class="comment">/*beforeSend: function(xhr, settings) &#123;</span></span><br><span class="line"><span class="comment">               xhr.setRequestHeader("Content-Type", "multipart/form-data;boundary=gc0p4Jq0M2Yt08jU534c0p");</span></span><br><span class="line"><span class="comment">               settings.data = &#123;name: "file", file: inputElement.files[0]&#125;;</span></span><br><span class="line"><span class="comment">           &#125;,*/</span></span><br><span class="line">           success: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">               <span class="keyword">if</span> ( result.reseponseInfo == <span class="string">"SUCCESS"</span> ) &#123;</span><br><span class="line"></span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">               &#125;</span><br><span class="line">           &#125;,</span><br><span class="line">           error: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">               <span class="built_in">console</span>.log(result.responseText);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<h3 id="写在最后的话"><a href="#写在最后的话" class="headerlink" title="写在最后的话"></a>写在最后的话</h3><p>老师还要改前端的字，好像好多字是动态生成的，解决了继续写，呀呀呀</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/13/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments',
+            notify: false, // 邮件提醒 v1.1.4新增，下一步中有具体的邮箱设置
+            verify: true,
+            app_id: '0Yons7ImdymE1KdGDa5DYg4s-gzGzoHsz',
+            app_key: 'jHgPeyqhrMHuA2rGqEE6Xf6W',
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+        });
+    </script>
+    
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ww1.sinaimg.cn/large/ad3e7317ly1fm1gubujwqj20at0atjwd.jpg"
+                alt="噗哈哈" />
+            
+              <p class="site-author-name" itemprop="name">噗哈哈</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lliiyyii" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:lliiyyii116633@163.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题"><span class="nav-number">1.</span> <span class="nav-text">windows构建java-springboot-mysql-activiti-redis项目部署到服务器的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面的话"><span class="nav-number">2.</span> <span class="nav-text">写在前面的话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连接redis的为问题"><span class="nav-number">2.1.</span> <span class="nav-text">连接redis的为问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">2.1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误提示"><span class="nav-number">2.1.2.</span> <span class="nav-text">错误提示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改方法"><span class="nav-number">2.1.3.</span> <span class="nav-text">修改方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目部署到服务器后数据库处理的各种问题"><span class="nav-number">2.2.</span> <span class="nav-text">项目部署到服务器后数据库处理的各种问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">2.2.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署到服务器上找不到controller之类的各种东西"><span class="nav-number">2.3.</span> <span class="nav-text">部署到服务器上找不到controller之类的各种东西</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#activiti无法显示解决方法"><span class="nav-number">2.3.2.</span> <span class="nav-text">activiti无法显示解决方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无法保存的问题描述"><span class="nav-number">2.3.3.</span> <span class="nav-text">无法保存的问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无法保存问题的错误提示"><span class="nav-number">2.3.4.</span> <span class="nav-text">无法保存问题的错误提示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法-1"><span class="nav-number">2.3.5.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xml方式使用mybatis的错误No-typehandler-found-for-property-XXX"><span class="nav-number">2.4.</span> <span class="nav-text">xml方式使用mybatis的错误No typehandler found for property XXX</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误描述"><span class="nav-number">2.4.1.</span> <span class="nav-text">错误描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#报错信息"><span class="nav-number">2.4.2.</span> <span class="nav-text">报错信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法-2"><span class="nav-number">2.4.3.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax使用时报错"><span class="nav-number">2.5.</span> <span class="nav-text">ajax使用时报错</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述-3"><span class="nav-number">2.5.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#报错信息-1"><span class="nav-number">2.5.2.</span> <span class="nav-text">报错信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法-3"><span class="nav-number">2.5.3.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决上传文件时400，required-request-part-file-is-not-present的问题"><span class="nav-number">2.6.</span> <span class="nav-text">解决上传文件时400，required request part file is not present的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误描述-1"><span class="nav-number">2.6.1.</span> <span class="nav-text">错误描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#报错信息-2"><span class="nav-number">2.6.2.</span> <span class="nav-text">报错信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法-4"><span class="nav-number">2.6.3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这个问题前端失败的问题已经解决了"><span class="nav-number">2.6.4.</span> <span class="nav-text">这个问题前端失败的问题已经解决了</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题描述-4"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题解决"><span class="nav-number">2.6.4.2.</span> <span class="nav-text">问题解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写在最后的话"><span class="nav-number">2.7.</span> <span class="nav-text">写在最后的话</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("0Yons7ImdymE1KdGDa5DYg4s-gzGzoHsz", "jHgPeyqhrMHuA2rGqEE6Xf6W");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
